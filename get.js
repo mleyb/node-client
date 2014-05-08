@@ -1,24 +1,28 @@
 var http = require('http');
+var https = require('https');
 
-var options = {
-  	host: 'www.google.com',
-  	port: 80,
-  	path: '/'
-};
+exports.get = function() {
 
-http.get(options, function(resp) {
+	var options = {
+	  	host: 'www.google.com',
+	  	port: 80,
+	  	path: '/'
+	};
 
-	console.log('Got response: ' + resp.statusCode);
+	http.get(options, function(resp) {
 
-	var buffer = "";
+		console.log('Got response: ' + resp.statusCode);
 
-   	resp.on("data", function(data) { 
-   		buffer = buffer + data; 
-   	});
+		var buffer = "";
 
-   	resp.on("end", function(data) { 
-   		console.log(buffer); 
-   	});
-}).on("error", function(e) {
-	console.log("Got error: " + e.message);
-});
+	   	resp.on("data", function(data) { 
+	   		buffer = buffer + data; 
+	   	});
+
+	   	resp.on("end", function(data) { 
+	   		console.log(buffer); 
+	   	});
+	}).on("error", function(e) {
+		console.log("Got error: " + e.message);
+	});
+}
